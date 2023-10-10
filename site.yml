@@ -1,0 +1,8 @@
+- hosts: tor_nxos
+  connection: network_cli
+  gather_facts: false
+  tasks: 
+    - name: run show version
+      nxos_facts:
+    - debug:
+        var: ansible_net_version
