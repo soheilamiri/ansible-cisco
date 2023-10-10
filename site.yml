@@ -9,7 +9,13 @@
     - name: create vlan
       cisco.nxos.nxos_vlans:
         config:
+        - vlan_id: 11
+          name: soheil50w00
+        - vlan_id: 12
+          name: soheil1w000
+    - name: Delete vlans.
+      cisco.nxos.nxos_vlans:
+        config:
         - vlan_id: 500
-          name: soheil5000
         - vlan_id: 1000
-          name: soheil1000
+        state: deleted
