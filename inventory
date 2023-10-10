@@ -4,7 +4,7 @@ ansible_python_interpreter=python
 
 [tor_nxos]
 #these object are for tebian Datacenter on HQ office
-sw1-3064-TOR311 ansible_host=172.16.144.6 ansible_user=ansible ansible_password=470121Q@
+sw1-3064-TOR311 ansible_host=172.16.144.6 #ansible_user=ansible ansible_password=470121Q@
 
 [tor_nxos:vars]
 #default value for tebian DC switches.
@@ -13,5 +13,5 @@ ansible_port=22
 #ansible_become=yes
 #ansible_become_method=enable
 ansible_network_os=nxos
-#ansible_user=ansible
-#ansible_password=470121Q@
+ansible_user=ansible
+ansible_password=470121Q@

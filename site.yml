@@ -6,3 +6,10 @@
       nxos_facts:
     - debug:
         var: ansible_net_version
+    - name: create vlan
+      cisco.nxos.nxos_vlans:
+        config:
+        - vlan_id: 500
+          name: soheil5000
+        - vlan_id: 1000
+          name: soheil1000
