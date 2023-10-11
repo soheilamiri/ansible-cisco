@@ -6,16 +6,61 @@
       nxos_facts:
     - debug:
         var: ansible_net_version
-    - name: create vlan
+    #deleteing VLAN
+    # - name: Delete Selected vlans.
+    #   cisco.nxos.nxos_vlans:
+    #     config:
+    #     - vlan_id: 110
+    #     - vlan_id: 120
+    #     state: deleted
+
+    - name: create vlan.
       cisco.nxos.nxos_vlans:
         config:
-        - vlan_id: 11
-          name: soheil50w00
-        - vlan_id: 12
-          name: soheil1w000
-    - name: Delete vlans.
-      cisco.nxos.nxos_vlans:
+        - vlan_id: 987
+          name: soheil
+        - vlan_id: 122
+          name: vmotioddn
+        - vlan_id: 150
+          name: sdsdsdssssdr
+        - vlan_id: 40
+          name: chehel
+    #this task will add new VLAN to an exiting vlans. but at least must define
+    #2 vlan ID, one can be the one that already exit.
+    - name: add vlans to trunked interface
+      nxos_l2_interfaces:
         config:
-        - vlan_id: 500
-        - vlan_id: 1000
-        state: deleted
+        - name: port-channel10
+          trunk:
+            native_vlan: 1
+            allowed_vlans: 122,150,987,40,30
+        
+    - name: change VLAN for access interface
+      nxos_l2_interfaces:
+        config:
+        - name: port-channel10
+          access:
+            vlan: 30
+        state: merged 
+  #this task will removed all vlan in trunk, except these are define in this task
+    - name: remove vlans from interface.
+      cisco.nxos.nxos_l2_interfaces:
+        config:
+        - name: Ethernet1/1
+          trunk:
+            #native_vlan: 20
+            allowed_vlans: 30,40
+        state: replaced
+     
+    - name: Override device configuration of all interfaces with provided configuration
+      cisco.nxos.nxos_interfaces:
+        config:
+        - name: Ethernet1/1
+          description: by soheilsssss2
+        #   enabled: true
+        # - name: Ethernet1/2
+        #   description: Configured by Ansible Network
+        #   enable: false
+        # - description: mgmt interfcae
+        #   name: mgmt0
+        # state: overridden
