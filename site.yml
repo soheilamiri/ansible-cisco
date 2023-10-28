@@ -6,13 +6,13 @@
       nxos_facts:
     - debug:
         var: ansible_net_version
-    #deleteing VLAN
-    # - name: Delete Selected vlans.
-    #   cisco.nxos.nxos_vlans:
-    #     config:
-    #     - vlan_id: 110
-    #     - vlan_id: 120
-    #     state: deleted
+    deleteing VLAN
+     - name: Delete Selected vlans.
+       cisco.nxos.nxos_vlans:
+         config:
+         - vlan_id: 110
+         - vlan_id: 120
+         state: deleted
 
     - name: create vlan.
       cisco.nxos.nxos_vlans:
